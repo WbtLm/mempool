@@ -347,3 +347,28 @@ inline int mpnsp::createMemPool(int tid,int initNum/*=InitNumInNode*/)
 {
     return do_createMemPool(sizeof(T),initNum,memPoolMap[tid]);
 }
+void mpnsp::memPool::debug()
+    {
+        #include<iostream>
+        using namespace std;
+        cout<<"maxNumInNode="<<maxNumInNode<<endl;
+        cout<<"AutoCleanSize="<<AutoCleanSize<<endl;
+        cout<<"topPrt=";
+        printf("%x\n",topPtr);
+        for(int i=0;i<=MaxNodeNum;i++)
+        {
+            cout<<"["<<i<<"]"<<"deleted=";
+            if(nodeArr[i]==NULL)
+            {
+                cout<<"NULL"<<endl;
+            }
+            else
+            {
+                cout<<nodeArr[i]->deleted<<" ";
+                printf("%p\t",nodeArr[i]->head);
+                cout<<"fptr="<<nodeArr[i]->fptr<<" nptr="<<nodeArr[i]->nptr;
+                cout<<" used/size="<<nodeArr[i]->used<<"/"<<nodeArr[i]->size<<endl;
+            }
+        }
+        return;
+    }
