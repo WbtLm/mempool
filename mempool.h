@@ -60,7 +60,7 @@ namespace mpnsp
         void* allocMemFromPool();
         void freeMemToPool(void *p);
         int clean(long long size=-1);
-        void debug();
+        void debug(); //debug函数在cpp文件中
     };
     int do_createMemPool(int nodeSize,int initNum,std::map<int,memPool*>&memPoolMap); //初始个数
     template<typename T>inline int createMemPool(int tid,int initNum=InitNumInNode);
@@ -69,38 +69,5 @@ template<typename T>    void freeNode(T* p,int tid);
 template<typename T>    T* allocNode(int tid);
 #include"mempool.cpp"
 
-
-void mpnsp::memPool::debug()
-    {
-        #include<iostream>
-        using namespace std;
-        cout<<"maxNumInNode="<<maxNumInNode<<endl;
-        cout<<"AutoCleanSize="<<AutoCleanSize<<endl;
-        cout<<"topPrt=";
-        printf("%x\n",topPtr);
-        for(int i=0;i<=MaxNodeNum;i++)
-        {
-            cout<<"["<<i<<"]"<<"deleted=";
-            if(nodeArr[i]==NULL)
-            {
-                cout<<"NULL"<<endl;
-            }
-            else
-            {
-                cout<<nodeArr[i]->deleted<<" ";
-                printf("%x\t",nodeArr[i]->head);
-                cout<<"fptr="<<nodeArr[i]->fptr<<" nptr="<<nodeArr[i]->nptr;
-                cout<<" used/size="<<nodeArr[i]->used<<"/"<<nodeArr[i]->size<<endl;
-       //         for(int j=0;j<nodeArr[i]->size;j++)
-       //         {
-       //             cout<<nodeArr[i]->ptrArr[j]<<" ";
-        //        }
-       //         cout<<endl;
-            }
-          //  return;
-
-        }
-        return;
-    }
 
 
